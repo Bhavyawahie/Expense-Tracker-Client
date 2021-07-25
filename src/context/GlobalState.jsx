@@ -23,10 +23,48 @@ export const GlobalProvider = ( {children} ) => {
         try {
             const res = await axios.get("/api/v1/transactions");
             dispatch({
-                type: "GET_TRANSACTIONS",
+                type: "GET_TRANSACTION",
                 payload: res.data.data
             });
         }
+        catch (err) {
+            dispatch({
+                type: "TRANSACTION_ERROR",
+                payload: err.response.data.error
+            });
+        }
+    }
+
+    async function deleteTransaction(id) {
+        try {
+            const res =  await axios.delete(`/api/v1/transactions/${id}`)
+            dispatch({
+                type: "DELETE_TRANSACTION",
+                payload: id
+            });            
+        } 
+        catch (err) {
+            dispatch({
+                type: "TRANSACTION_ERROR",
+                payload: err.response.data.error
+            });
+        }
+    }
+
+    async function addTransaction(transaction) {
+        const config = {
+            header : {
+                "Content-Type": "application/json"
+            }
+        }
+
+        try {
+            const res = await axios.post("/api/v1/transactions", transaction, config)
+            dispatch({
+                type: "ADD_TRANSACTIONS",
+                payload: res.data.data 
+            });
+        } 
         catch (err) {
             dispatch({
                 type: "TRANSACTION_ERROR",
@@ -35,28 +73,17 @@ export const GlobalProvider = ( {children} ) => {
         }
     }
 
-    function deleteTransaction(id) {
-        dispatch({
-            type: "DELETE_TRANSACTION",
-            payload: id
-        });
-    }
-
-    function addTransaction(transaction) {
-        dispatch({
-            type: "ADD_TRANSACTIONS",
-            payload: transaction
-        });
-    }
-
     return (
         <GlobalContext.Provider value={
-            { transactions: state.transactions,
-            error: state.error, 
-            loading: state.loading, 
-            getTransactions, 
-            deleteTransaction, 
-            addTransaction}}>
+            { 
+                transactions: state.transactions,
+                error: state.error, 
+                loading: state.loading, 
+                getTransactions, 
+                deleteTransaction, 
+                addTransaction
+                }
+            }>
             {children}
             </GlobalContext.Provider>
     )

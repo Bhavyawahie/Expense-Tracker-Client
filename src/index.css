@@ -27,6 +27,11 @@ body {
 h1 {
   letter-spacing: 1px;
   margin: 0;
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 26px;
 }
 
 h3 {
@@ -89,7 +94,7 @@ input[type='number'] {
 
 .btn {
   cursor: pointer;
-  background-color: #9c88ff;
+  background-color: #1efd7b;
   box-shadow: var(--box-shadow);
   color: #fff;
   border: 0;
