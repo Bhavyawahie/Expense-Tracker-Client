@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import AppReducer from "./AppReducer"
+import {AppReducer} from "./AppReducer"
 import axios from "axios";
 //Initial State
 const initialState = {
@@ -38,6 +38,7 @@ export const GlobalProvider = ( {children} ) => {
     async function deleteTransaction(id) {
         try {
             const res =  await axios.delete(`/api/v1/transactions/${id}`)
+            console.log(res.data);
             dispatch({
                 type: "DELETE_TRANSACTION",
                 payload: id
