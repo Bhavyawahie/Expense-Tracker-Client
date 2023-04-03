@@ -19,6 +19,7 @@ export const AppReducer = (state, action) => {
         case "TRANSACTION_ERROR":
             return {
                 ...state,
+                loading: false,
                 error: action.payload
             }    
         default:
