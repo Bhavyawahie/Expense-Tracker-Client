@@ -9,11 +9,13 @@ export const AppReducer = (state, action) => {
         case "DELETE_TRANSACTION": 
             return {
                 ...state,
+                loading: false,
                 transactions: state.transactions.filter(transaction => transaction._id !== action.payload)
             }
         case "ADD_TRANSACTIONS":
             return {
                 ...state,
+                loading: false,
                 transactions: [...state.transactions, action.payload]
             }
         case "TRANSACTION_ERROR":
