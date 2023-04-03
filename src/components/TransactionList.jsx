@@ -7,7 +7,6 @@ export const TransactionList = () => {
     
     useEffect(() => {
         getTransactions();
-        console.log("hogya");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
