@@ -21,7 +21,7 @@ export const GlobalProvider = ( {children} ) => {
 
     async function getTransactions() {
         try {
-            const res = await axios.get("/api/v1/transactions");
+            const res = await axios.get("https://expense-tracker-api.netlify.app/api/v1/transactions");
             dispatch({
                 type: "GET_TRANSACTION",
                 payload: res.data.data
@@ -37,7 +37,7 @@ export const GlobalProvider = ( {children} ) => {
 
     async function deleteTransaction(id) {
         try {
-            const res =  await axios.delete(`/api/v1/transactions/${id}`)
+            const res =  await axios.delete(`https://expense-tracker-api.netlify.app/api/v1/transactions/${id}`)
             console.log(res.data);
             dispatch({
                 type: "DELETE_TRANSACTION",
@@ -60,7 +60,7 @@ export const GlobalProvider = ( {children} ) => {
         }
 
         try {
-            const res = await axios.post("/api/v1/transactions", transaction, config)
+            const res = await axios.post("https://expense-tracker-api.netlify.app/api/v1/transactions", transaction, config)
             dispatch({
                 type: "ADD_TRANSACTIONS",
                 payload: res.data.data 

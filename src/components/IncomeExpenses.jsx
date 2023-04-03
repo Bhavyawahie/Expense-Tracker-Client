@@ -1,15 +1,23 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import { numberWithCommas } from '../util/format'
 
 export const IncomeExpenses = () => {
-    const { transactions } = useContext(GlobalContext);
-    const amounts = transactions.map(transaction => transaction.amount);
-    const income = amounts
-    .filter(item => item > 0)
-    .reduce((acc, item) => (acc += item), 0)
-    .toFixed(2);
-    const expense = (amounts.filter(item => item < 0).reduce((acc, item) => (acc += item), 0)*-1).toFixed(2);
+    const { loading, transactions } = useContext(GlobalContext);
+    let [amounts, setAmounts] = useState([])
+    let [income, setIncome] = useState(0)
+    let [expense, setExpense] = useState(0)
+    
+    useEffect(() => {
+        if(!loading) {
+            setAmounts([...transactions.map(transaction => transaction.amount)])
+        }
+    }, [loading])
+    
+    useEffect(() =>{
+        setIncome(amounts.filter(item => item > 0).reduce((acc, item) => (acc += item), 0).toFixed(2))
+        setExpense((amounts.filter(item => item < 0).reduce((acc, item) => (acc += item), 0)*-1).toFixed(2))
+    }, [amounts])
     return (
         <div className="inc-exp-container">
             <div>

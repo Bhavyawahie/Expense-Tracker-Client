@@ -1,12 +1,23 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext  } from '../context/GlobalState'
 import { numberWithCommas } from '../util/format'
 
 
 export const Balance = () => {
-    const { transactions } = useContext(GlobalContext);
-    const amounts = transactions.map(transaction => transaction.amount);
-    const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
+    const { error, loading, transactions } = useContext(GlobalContext)
+    let [amounts, setAmounts] = useState([])
+    let [total, setTotal] = useState(0)
+
+    useEffect(() => {
+        if(!loading) {
+            setAmounts([...transactions.map(transaction => transaction.amount)])
+        }
+    }, [loading])
+
+    useEffect(() =>{
+        setTotal(amounts.reduce((acc, item) => (acc += item), 0).toFixed(2))
+    }, [amounts])
+    
     return (
         <>
         <h4>Your Balance</h4>
