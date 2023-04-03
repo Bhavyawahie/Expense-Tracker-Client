@@ -12,7 +12,7 @@ export const Balance = () => {
         if(!loading) {
             setAmounts([...transactions.map(transaction => transaction.amount)])
         }
-    }, [loading])
+    }, [loading, transactions])
 
     useEffect(() =>{
         setTotal(amounts.reduce((acc, item) => (acc += item), 0).toFixed(2))

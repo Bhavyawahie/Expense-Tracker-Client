@@ -9,14 +9,11 @@ export const AddTransaction = () => {
 
     const submissionHandler = (event) => {
         event.preventDefault();
-
-
         const newTransaction = {
             id: Math.floor(Math.random() * 100000000),
             text,
             amount: +amount
         }
-
         addTransaction(newTransaction);
         setText("");
         setAmount(0);

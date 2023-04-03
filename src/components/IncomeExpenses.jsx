@@ -12,7 +12,7 @@ export const IncomeExpenses = () => {
         if(!loading) {
             setAmounts([...transactions.map(transaction => transaction.amount)])
         }
-    }, [loading])
+    }, [loading, transactions])
     
     useEffect(() =>{
         setIncome(amounts.filter(item => item > 0).reduce((acc, item) => (acc += item), 0).toFixed(2))
