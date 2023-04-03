@@ -27,10 +27,10 @@ export const GlobalProvider = ( {children} ) => {
                 payload: res.data.data
             });
         }
-        catch (err) {
+        catch (error) {
             dispatch({
                 type: "TRANSACTION_ERROR",
-                payload: err.response.data.error
+                payload:  error.response && error.response.data.message ? error.response.data.message : error.message
             });
         }
     }
@@ -44,10 +44,10 @@ export const GlobalProvider = ( {children} ) => {
                 payload: id
             });            
         } 
-        catch (err) {
+        catch (error) {
             dispatch({
                 type: "TRANSACTION_ERROR",
-                payload: err.response.data.error
+                payload:  error.response && error.response.data.message ? error.response.data.message : error.message
             });
         }
     }
@@ -66,10 +66,10 @@ export const GlobalProvider = ( {children} ) => {
                 payload: res.data.data 
             });
         } 
-        catch (err) {
+        catch (error) {
             dispatch({
                 type: "TRANSACTION_ERROR",
-                payload: err.response.data.error
+                payload:  error.response && error.response.data.message ? error.response.data.message : error.message
             })
         }
     }
