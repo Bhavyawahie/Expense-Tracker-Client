@@ -4,7 +4,7 @@ import { numberWithCommas } from '../util/format'
 
 
 export const Balance = () => {
-    const { error, loading, transactions } = useContext(GlobalContext)
+    const {loading, transactions} = useContext(GlobalContext)
     let [amounts, setAmounts] = useState([])
     let [total, setTotal] = useState(0)
 
